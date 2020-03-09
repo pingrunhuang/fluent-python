@@ -97,7 +97,7 @@ def large_order_promo(order):
     return 0
 
 # BEGIN STRATEGY_BEST2
-
+# globals() return the current module's global symbol table
 promos = [globals()[name] for name in globals()  # <1>
             if name.endswith('_promo')  # <2>
             and name != 'best_promo']   # <3>

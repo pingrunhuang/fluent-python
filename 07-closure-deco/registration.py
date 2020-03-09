@@ -1,3 +1,7 @@
+'''
+demonstration of decorators running at import time
+'''
+
 # BEGIN REGISTRATION
 
 registry = []  # <1>

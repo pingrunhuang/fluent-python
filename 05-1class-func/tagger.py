@@ -42,3 +42,24 @@ def tag(name, *content, cls=None, **attrs):
     else:
         return '<%s%s />' % (name, attr_str)
 # END TAG_FUNC
+
+
+# BEGIN binding
+from inspect import signature
+
+sig = signature(tag)
+my_params = {'name': 'img', 'title': 'Sunset Boulevard', 'src': 'sunset.jpg', 'cls': 'framed'}
+
+bound_args = sig.bind(**my_params)
+for name, value in bound_args.arguments.items():
+    print(name, '=', value)
+
+## try deleting
+del my_params['name']
+
+try:
+    bound_args = sig.bind(**my_params)
+except TypeError e:
+    print(e)
+
+# END binding

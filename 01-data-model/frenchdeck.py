@@ -15,3 +15,13 @@ class FrenchDeck:
 
     def __getitem__(self, position):
         return self._cards[position]
+
+if __name__ == "__main__":
+    from random import choice
+
+    deck = FrenchDeck()
+    # randomly pick a card
+    random_card = choice(deck)
+    print(random_card)
+
+

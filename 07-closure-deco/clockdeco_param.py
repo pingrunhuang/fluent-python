@@ -23,7 +23,7 @@ def clock(fmt=DEFAULT_FMT):  # <1>
             name = func.__name__
             args = ', '.join(repr(arg) for arg in _args)  # <5>
             result = repr(_result)  # <6>
-            print(fmt.format(**locals()))  # <7>
+            print(fmt.format(**locals()))  # <7>  allows any local variable of clocked to be referenced in the fmt. 
             return _result  # <8>
         return clocked  # <9>
     return decorate  # <10>
