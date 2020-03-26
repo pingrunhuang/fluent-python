@@ -181,7 +181,9 @@ class Vector:
                 all(a == b for a, b in zip(self, other)))
 
     def __hash__(self):
+        # typical map-reduce
         hashes = (hash(x) for x in self)
+        # hashes = map(hash, self._components) # is the same as above
         return functools.reduce(operator.xor, hashes, 0)
 
     def __abs__(self):
@@ -191,6 +193,8 @@ class Vector:
         return bool(abs(self))
 
     def __len__(self):
+        # as suggested here: https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython
+        # length info is kept in the header of the list so should not traverse the whole list to get the length
         return len(self._components)
 
     def __getitem__(self, index):

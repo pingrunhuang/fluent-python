@@ -9,3 +9,12 @@ rewritten using the new async/await syntax available in Python 3.5
 ONLY, instead of the "yield-from" syntax which works since Python
 3.3 (and will still work with Python 3.5).
 ##################################################################
+
+how does coroutines get executed? Wrap it as a task in the following ways
+1. asyncio.async(coro_or_future, *, loop=None) where the loop is the eventloop
+2. BaseEventLoop.create_task(coro) 
+
+
+Relationships between futures, coroutines and tasks 
+
+https://docs.python.org/3/library/asyncio-task.html

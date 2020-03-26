@@ -153,9 +153,17 @@ class Vector2d:
             outer_fmt = '({}, {})'
         components = (format(c, fmt_spec) for c in coords)
         return outer_fmt.format(*components)
+    
+    def __complex__(self):
+        # called by complex method
+        return complex(self.__x, self.__y) 
 
     @classmethod
     def frombytes(cls, octets):
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(*memv)
+
+if __name__ == "__main__":
+    v = Vector2d(1,1)
+    print(complex(v))

@@ -36,7 +36,7 @@ def download_one(cc):  # <6>
 def download_many(cc_list):
     loop = asyncio.get_event_loop()  # <8>
     to_do = [download_one(cc) for cc in sorted(cc_list)]  # <9>
-    wait_coro = asyncio.wait(to_do)  # <10>
+    wait_coro = asyncio.wait(to_do)  # <10> this is actually generating a coroutine wait_coro
     res, _ = loop.run_until_complete(wait_coro)  # <11>
     loop.close() # <12>
 

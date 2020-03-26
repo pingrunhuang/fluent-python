@@ -22,3 +22,8 @@ class Sentence:
 
     def __repr__(self):
         return 'Sentence(%s)' % reprlib.repr(self.text)  # <4>
+
+if __name__ == "__main__":
+    s = Sentence('Pig and Pepper')
+    it = iter(s3)
+    

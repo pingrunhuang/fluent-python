@@ -11,7 +11,7 @@
 # BEGIN YIELD_FROM_EXPANSION
 _i = iter(EXPR)  # <1>
 try:
-    _y = next(_i)  # <2> yield from already include priming, so incompatible with priming decorator
+    _y = next(_i)  # <2>
 except StopIteration as _e:
     _r = _e.value  # <3>
 else:

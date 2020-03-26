@@ -19,7 +19,10 @@ from concurrent import futures
 
 from flags import save_flag, get_flag, show, main
 
-MAX_WORKERS = 20
+# having 5 contries will have the rest 2 pending
+# The less you have, the more sequential the operations will be
+# The more you have, the less ordered the result will be (meaning more variation)
+MAX_WORKERS = 3  
 
 
 def download_one(cc):
@@ -32,7 +35,7 @@ def download_one(cc):
 # BEGIN FLAGS_THREADPOOL_AS_COMPLETED
 def download_many(cc_list):
     cc_list = cc_list[:5]  # <1>
-    with futures.ThreadPoolExecutor(max_workers=3) as executor:  # <2>
+    with futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:  # <2>
         to_do = []
         for cc in sorted(cc_list):  # <3>
             future = executor.submit(download_one, cc)  # <4>

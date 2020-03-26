@@ -8,3 +8,18 @@ http://shop.oreilly.com/product/0636920032519.do
   written, the **asyncio** package was provisional, and the latest
   version of **aiohttp** was 0.13.1. The API for both packages had
   significant breaking changes.
+
+
+
+future = executor.submit(func, *args) 
+fs.add(future)
+future_iterr = futures.as_completed(fs)
+
+
+Parallel Programming with python
+Python Cookbook
+Effective Python
+High Performance Python
+The python standard library by example
+Seven Concurrency Models in Seven Weeks 
+

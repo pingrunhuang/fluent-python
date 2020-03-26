@@ -23,6 +23,8 @@ def loiter(n):  # <2>
 def main():
     display('Script starting.')
     executor = futures.ThreadPoolExecutor(max_workers=3)  # <4>
+    # map method will keep the order of the result the same as the executed order
+    # in other words, if the first function takes 10s, and the rest take 1s, map will block until the first executed 
     results = executor.map(loiter, range(5))  # <5>
     display('results:', results)  # <6>.
     display('Waiting for individual results:')

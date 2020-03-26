@@ -104,51 +104,19 @@ Test of slicing::
     TypeError: Vector indices must be integers
 
 
-Tests of dynamic attribute access::
-
-    >>> v7 = Vector(range(10))
-    >>> v7.x
-    0.0
-    >>> v7.y, v7.z, v7.t
-    (1.0, 2.0, 3.0)
-
 
 Dynamic attribute lookup failures::
 
-    >>> v7.k
-    Traceback (most recent call last):
-      ...
-    AttributeError: 'Vector' object has no attribute 'k'
-    >>> v3 = Vector(range(3))
-    >>> v3.t
-    Traceback (most recent call last):
-      ...
-    AttributeError: 'Vector' object has no attribute 't'
-    >>> v3.spam
-    Traceback (most recent call last):
-      ...
-    AttributeError: 'Vector' object has no attribute 'spam'
+
 
 
 Tests of preventing attributes from 'a' to 'z'::
 
-    >>> v1.x = 7
-    Traceback (most recent call last):
-      ...
-    AttributeError: readonly attribute 'x'
-    >>> v1.w = 7
-    Traceback (most recent call last):
-      ...
-    AttributeError: can't set attributes 'a' to 'z' in 'Vector'
+
 
 Other attributes can be set::
 
-    >>> v1.X = 'albatross'
-    >>> v1.X
-    'albatross'
-    >>> v1.ni = 'Ni!'
-    >>> v1.ni
-    'Ni!'
+
 
 """
 
@@ -236,3 +204,55 @@ class Vector:
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+
+def dynamic_attribute_access():
+    v = Vector(range(10))
+    assert v.x == 0.0
+    assert (v.y, v.z, v.t) == (1.0, 2.0, 3.0)
+
+
+def dynamic_attribute_lookup():
+    v = Vector(range(10))
+    try:
+        v.k
+    except AttributeError as e:
+        print(e)
+    
+    v = Vector(range(3))
+    try:
+        v.t
+    except AttributeError as e:
+        print(e)
+    try:
+        v.spam
+    except AttributeError as e:
+        print(e)
+    
+
+def preventing_attribute_from_a_to_z():
+    v = Vector([3,4,5])
+    try:
+        v.x = 7
+    except AttributeError as e:
+        print(e)
+    
+    try:
+        v.w = 7
+    except AttributeError as e:
+        print(e)
+
+
+def set_other_attributes():
+    v = Vector([3,4,5])
+    v.X = 'albatross'
+    assert v.X == 'albatross'
+    v.ni = 'Ni!'
+    assert v.ni == 'Ni!'
+
+
+if __name__ == "__main__":
+    dynamic_attribute_access()
+    dynamic_attribute_lookup()
+    preventing_attribute_from_a_to_z()
+    set_other_attributes()

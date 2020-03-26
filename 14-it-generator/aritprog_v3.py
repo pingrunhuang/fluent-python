@@ -9,3 +9,7 @@ def aritprog_gen(begin, step, end=None):
         ap_gen = itertools.takewhile(lambda n: n < end, ap_gen)
     return ap_gen
 # END ARITPROG_ITERTOOLS
+
+if __name__ == "__main__":
+    for x in aritprog_gen(1, 1):
+        print(x)

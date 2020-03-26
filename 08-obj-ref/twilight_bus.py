@@ -15,7 +15,8 @@ class TwilightBus:
         if passengers is None:
             self.passengers = []  # <1>
         else:
-            self.passengers = passengers  #<2>
+            self.passengers = passengers  #<2> self.passengers is an alias for passengers which will affect outter mutable object passed in
+            # remedy copy: self.passengers = list(passengers)
 
     def pick(self, name):
         self.passengers.append(name)

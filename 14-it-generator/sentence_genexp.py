@@ -1,5 +1,7 @@
 """
 Sentence: iterate over words using a generator expression
+
+similar to list comprehension
 """
 
 # BEGIN SENTENCE_GENEXP

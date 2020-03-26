@@ -33,7 +33,7 @@ def download_one(cc):  # <3>
 def download_many(cc_list):
     workers = min(MAX_WORKERS, len(cc_list))  # <4>
     with futures.ThreadPoolExecutor(workers) as executor:  # <5>
-        res = executor.map(download_one, sorted(cc_list))  # <6>
+        res = executor.map(download_one, sorted(cc_list))  # <6> res is an iterator of futures in which __next__ calls the result() of each future
 
     return len(list(res))  # <7>
 

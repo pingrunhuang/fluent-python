@@ -29,6 +29,11 @@ True
 >>> HauntedBus.__init__.__defaults__[0] is bus2.passengers
 True
 
+
+The problem is that each default value is evaluated when the function is defined 
+— i.e. usually when the module is loaded — and the default values become attributes of the function object. 
+So if a default value is a mutable object, and you change it, the change will affect every future call of the function. 
+
 """
 
 # BEGIN HAUNTED_BUS_CLASS

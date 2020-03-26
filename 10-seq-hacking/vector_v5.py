@@ -146,47 +146,8 @@ Most hash values of non-integers vary from a 32-bit to 64-bit CPython build::
     >>> hash(v2) == (384307168202284039 if sys.maxsize > 2**32 else 357915986)
     True
 
-
-Tests of ``format()`` with Cartesian coordinates in 2D::
-
-    >>> v1 = Vector([3, 4])
-    >>> format(v1)
-    '(3.0, 4.0)'
-    >>> format(v1, '.2f')
-    '(3.00, 4.00)'
-    >>> format(v1, '.3e')
-    '(3.000e+00, 4.000e+00)'
-
-
-Tests of ``format()`` with Cartesian coordinates in 3D and 7D::
-
-    >>> v3 = Vector([3, 4, 5])
-    >>> format(v3)
-    '(3.0, 4.0, 5.0)'
-    >>> format(Vector(range(7)))
-    '(0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0)'
-
-
 Tests of ``format()`` with spherical coordinates in 2D, 3D and 4D::
 
-    >>> format(Vector([1, 1]), 'h')  # doctest:+ELLIPSIS
-    '<1.414213..., 0.785398...>'
-    >>> format(Vector([1, 1]), '.3eh')
-    '<1.414e+00, 7.854e-01>'
-    >>> format(Vector([1, 1]), '0.5fh')
-    '<1.41421, 0.78540>'
-    >>> format(Vector([1, 1, 1]), 'h')  # doctest:+ELLIPSIS
-    '<1.73205..., 0.95531..., 0.78539...>'
-    >>> format(Vector([2, 2, 2]), '.3eh')
-    '<3.464e+00, 9.553e-01, 7.854e-01>'
-    >>> format(Vector([0, 0, 0]), '0.5fh')
-    '<0.00000, 0.00000, 0.00000>'
-    >>> format(Vector([-1, -1, -1, -1]), 'h')  # doctest:+ELLIPSIS
-    '<2.0, 2.09439..., 2.18627..., 3.92699...>'
-    >>> format(Vector([2, 2, 2, 2]), '.3eh')
-    '<4.000e+00, 1.047e+00, 9.553e-01, 7.854e-01>'
-    >>> format(Vector([0, 1, 0, 0]), '0.5fh')
-    '<1.00000, 1.57080, 0.00000, 0.00000>'
 """
 
 from array import array
@@ -272,7 +233,7 @@ class Vector:
         if fmt_spec.endswith('h'):  # hyperspherical coordinates
             fmt_spec = fmt_spec[:-1]
             coords = itertools.chain([abs(self)],
-                                     self.angles())  # <4>
+                                     self.angles())  # <4> generator expression of concatenating 2 generator
             outer_fmt = '<{}>'  # <5>
         else:
             coords = self
@@ -286,3 +247,33 @@ class Vector:
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
 # END VECTOR_V5
+
+
+def format_cartesian_coordinates():
+    v = Vector([3, 4])
+    assert format(v) == '(3.0, 4.0)'
+    assert format(v, '.2f') == '(3.00, 4.00)'
+    assert format(v, '.3e') == '(3.000e+00, 4.000e+00)'
+
+    v = Vector([3, 4, 5])
+    assert format(v3) == '(3.0, 4.0, 5.0)'
+
+    v = Vector(range(7))
+    assert format(Vector(range(7))) == '(0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0)'
+
+
+def format_sperical_coordinates():
+    print(format(Vector([1, 1]), 'h')) # '<1.414213..., 0.785398...>'
+    print(format(Vector([1, 1]), '.3eh')) # '<1.414e+00, 7.854e-01>'    
+    print(format(Vector([1, 1]), '0.5fh')) # '<1.41421, 0.78540>'
+    print(format(Vector([1, 1, 1]), 'h'))  # '<1.73205..., 0.95531..., 0.78539...>'
+    print(format(Vector([2, 2, 2]), '.3eh')) # '<3.464e+00, 9.553e-01, 7.854e-01>'
+    print(format(Vector([0, 0, 0]), '0.5fh')) # '<0.00000, 0.00000, 0.00000>'
+    format(Vector([-1, -1, -1, -1]), 'h')  # '<2.0, 2.09439..., 2.18627..., 3.92699...>'
+    format(format(Vector([2, 2, 2, 2]), '.3eh')) # '<4.000e+00, 1.047e+00, 9.553e-01, 7.854e-01>'
+    format(format(Vector([0, 1, 0, 0]), '0.5fh')) # '<1.00000, 1.57080, 0.00000, 0.00000>'
+
+
+if __name__ == "__main__":
+    format_sperical_coordinates()
+    format_sperical_coordinates()

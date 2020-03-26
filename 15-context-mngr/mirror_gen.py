@@ -47,7 +47,7 @@ This exposes the context manager operation::
 
 import contextlib
 
-
+object
 @contextlib.contextmanager  # <1>
 def looking_glass():
     import sys
