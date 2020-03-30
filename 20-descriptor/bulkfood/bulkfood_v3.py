@@ -40,7 +40,7 @@ class Quantity:  # <1>
     def __init__(self, storage_name):
         self.storage_name = storage_name  # <2>
 
-    def __set__(self, instance, value):  # <3>
+    def __set__(self, instance, value):  # <3> self is the descriptor instance
         if value > 0:
             instance.__dict__[self.storage_name] = value  # <4>
         else:
