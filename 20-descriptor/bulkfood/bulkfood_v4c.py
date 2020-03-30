@@ -63,3 +63,7 @@ class LineItem:
     def subtotal(self):
         return self.weight * self.price
 # END LINEITEM_V4C
+
+if __name__ == "__main__":
+    item = LineItem('test', 1,23)
+    print(item.subtotal())
